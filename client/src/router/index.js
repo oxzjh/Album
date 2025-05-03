@@ -1,6 +1,7 @@
 import Location from "@/views/Location.vue";
 import LocationImage from "@/views/LocationImage.vue";
 import People from "@/views/People.vue";
+import PeopleFace from "@/views/PeopleFace.vue";
 import Search from "@/views/Search.vue";
 import Setting from "@/views/Setting.vue";
 import Timeline from "@/views/Timeline.vue";
@@ -21,6 +22,10 @@ export default createRouter({
         {
             path: "/people",
             component: People
+        },
+        {
+            path: "/people/:cid",
+            component: PeopleFace
         },
         {
             path: "/location",

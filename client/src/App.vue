@@ -5,7 +5,7 @@
                 <ElIcon>
                     <Search />
                 </ElIcon>
-                <span>文搜图</span>
+                <span>搜索</span>
             </ElMenuItem>
             <ElMenuItem index="/people">
                 <ElIcon>

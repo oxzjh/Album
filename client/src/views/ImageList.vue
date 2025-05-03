@@ -5,7 +5,7 @@
     </div>
     <div class="image-container">
         <ImageItem v-for="image, index in images" class="image-item" :key="image.id" :src="getThumbnailURL(image.id)"
-            :src_list="srcList" :initial_index="initIndex" @mousedown="onImageClick(index)" />
+            :src_list="previewList || srcList" :initial_index="initIndex" @mousedown="onImageClick(index)" />
     </div>
 </template>
 
@@ -17,7 +17,7 @@ import { ArrowLeft } from '@element-plus/icons-vue';
 import router from '@/router';
 import { ref, shallowRef, watch } from 'vue';
 
-const props = defineProps(["title", "images"])
+const props = defineProps(["title", "images" ,"previewList"])
 const srcList = shallowRef([])
 const initIndex = ref(0)
 

@@ -8,12 +8,20 @@
         </ElFormItem>
         <ElButton :icon="Search" type="primary" @click="onSearchClick" disabled>搜索</ElButton>
     </div>
+    <ElUpload accept=".jpg,.jpeg,.png,.webp,.tif,.tiff" :auto-upload="false" drag :on-change="onUploadChange">
+        <ElIcon class="el-icon--upload">
+            <UploadFilled />
+        </ElIcon>
+        <div class="el-upload__text">
+            拖拽图片到这里 <em>图搜图</em>
+        </div>
+    </ElUpload>
     <ImageList :images="images" />
 </template>
 
 <script setup>
-import { Search } from '@element-plus/icons-vue';
-import { ElButton, ElFormItem, ElInput, ElInputNumber, ElMessage } from 'element-plus';
+import { Search, UploadFilled } from '@element-plus/icons-vue';
+import { ElButton, ElFormItem, ElIcon, ElInput, ElInputNumber, ElMessage, ElUpload } from 'element-plus';
 import { ref, shallowRef } from 'vue';
 import ImageList from './ImageList.vue';
 import { post } from '../../request';
@@ -37,12 +45,23 @@ function onSearchClick() {
         ElMessage({ message: "请输入搜索内容", type: "error" })
         return
     }
-    post("/album/search", { text: text.value }, result => {
-        images.value = result.images
-        if (result.images.length == 0) {
-            ElMessage({ message: "未查询到匹配的图片", type: "warning" })
-        }
-    })
+    post("/album/search", { text: text.value }, onSearchResponse)
+}
+
+function onSearchResponse(result) {
+    images.value = result.images
+    if (result.images.length == 0) {
+        ElMessage({ message: "未查询到匹配的图片", type: "warning" })
+    }
+}
+
+function onUploadChange(file) {
+    const reader = new FileReader()
+    reader.readAsDataURL(file.raw)
+    reader.onload = function () {
+        var index = reader.result.indexOf(",")
+        post("/album/search", { image: reader.result.substr(index + 1) }, onSearchResponse)
+    }
 }
 </script>
 
