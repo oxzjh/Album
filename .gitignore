@@ -2,3 +2,6 @@
 *.exe
 *.dll
 /models
+release/geo.go
+release/dist
+config.json

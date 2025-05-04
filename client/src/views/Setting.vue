@@ -20,18 +20,20 @@ import { onMounted, onUnmounted, ref } from 'vue';
 import { post } from '../../request';
 
 const paths = ref([])
-const status = ref(1)
+const status = ref(0)
 const processed = ref(0)
 const total = ref(0)
 
 let statusTimer = null
 
 onMounted(() => {
-    post("/album/paths", {}, result => {
-        paths.value = result.paths
-    })
+    setTimeout(() => {
+        post("/album/paths", {}, result => {
+            paths.value = result.paths
+        })
+    }, 100)
     statusTimer = setInterval(getStatus, 1000);
-    getStatus()
+    // getStatus()
 })
 
 onUnmounted(() => {
