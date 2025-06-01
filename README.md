@@ -1,6 +1,6 @@
 # Album
 
-下载：https://github.com/oxzjh/Album/releases/download/v0.1/Album.zip
+下载：https://github.com/oxzjh/Album/releases/download/v0.2/Album.zip
 
 https://github.com/user-attachments/assets/ce256e62-9e6c-4f7a-89e4-0a8fd8787eb7
 
